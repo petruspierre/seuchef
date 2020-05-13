@@ -10,7 +10,7 @@ export default styles = StyleSheet.create({
         //justifyContent: 'center',
     },
     header: {
-        marginTop: 64,
+        marginTop: 48,
         marginLeft: 32,
         width: commonStyles.metric.screenWidth
     },

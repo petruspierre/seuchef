@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, FlatList, ScrollView } from 'react-native';
+import { Text, View, TextInput, FlatList, ScrollView } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
 import styles from './styles'
 
@@ -7,7 +8,7 @@ import Header from '../../components/Header'
 import CategoryCard from '../../components/CategoryCard'
 import RecipeCard from '../../components/RecipeCard'
 
-export default function Home() {
+export default function Home({ navigation }) {
 
   const [search, setSearch] = useState('')
 
@@ -38,21 +39,24 @@ export default function Home() {
       title: 'sopa de mandioquinha',
       image: 'https://img.itdg.com.br/tdg/images/recipes/000/198/564/304145/304145_original.jpg?mode=crop&width=710&height=400',
       amount: 3,
-      time: 35
+      time: 35,
+      author: 'Maria José'
     },
     {
       id: 2,
       title: 'carne de panela com batata',
       image: 'https://craftlog.com/m/i/8480646=s1280=h960',
       amount: 6,
-      time: 45
+      time: 45,
+      author: 'João Leão'
     },
     {
       id: 3,
       title: 'lombo barbecue com farofa de frutas e espinafre frito',
       image: 'https://img.imirante.com.br/2020/04/21/1587471393-887793063-304x175.jpg',
       amount: 4,
-      time: 60
+      time: 60,
+      author: 'João Leão'
     }
   ])
 
@@ -60,40 +64,75 @@ export default function Home() {
     <View style={styles.container}>
 
       <Header />
-      <View style={styles.header}>
-        <Text style={styles.title}>olá, chef!</Text>
-        <Text style={styles.subtitle}>já decidiu o que vai comer hoje?</Text>
 
-        <TextInput
-          style={styles.input}
-          value={search}
-          onChangeText={text => setSearch(text)}
-          placeholder="nome da receita"
-        />
+      <View style={styles.header}>
+        {!search && (
+          <View>
+            <Text style={styles.title}>olá, chef! </Text>
+
+            <Text style={styles.subtitle}> já decidiu o que vai comer hoje? </Text>
+          </View>
+        )}
+
+          <TextInput
+            style={styles.input}
+            value={search}
+            onChangeText={text => setSearch(text)}
+            placeholder="nome da receita"
+            autoCapitalize="none"
+          />
       </View>
 
-      <ScrollView style={{marginTop: 24, paddingTop: 8,}}>
-        <View style={styles.categories}>
-          <FlatList 
-            data={categories}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item}) =>  <CategoryCard title={item.name} image={item.image} count={item.count}/>}
-            keyExtractor={(item) => String(item.id)}
-          />
-        </View>
+      {!search &&
+      (
+        <ScrollView style={{marginTop: 24, paddingTop: 8,}}>
 
-        <Text style={styles.containerTitle}>Receitas populares</Text>
-        <View style={styles.categories}>
-          <FlatList 
-            data={popular}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item}) =>  <RecipeCard title={item.title} image={item.image} time={item.time} amount={item.amount}/>}
-            keyExtractor={(item) => String(item.id)}
-          />
-        </View>
-      </ScrollView>
+          <View 
+            style={styles.categories}>
+            <FlatList 
+              data={categories}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({item}) =>  <CategoryCard title={item.name} image={item.image} count={item.count}/>}
+              keyExtractor={(item) => String(item.id)}
+            />
+          </View>
+
+          <Text style={styles.containerTitle}>Receitas populares </Text>
+          
+          <View
+            style={styles.categories}>
+            <FlatList 
+              data={popular}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({item}) =>  <RecipeCard 
+                                        author={item.author}
+                                        title={item.title} 
+                                        image={item.image} 
+                                        time={item.time} 
+                                        amount={item.amount}
+                                        />}
+              keyExtractor={(item) => String(item.id)}
+            />
+          </View >
+
+          <Text style={styles.containerTitle}>Receitas recentes </Text>
+          
+          <View
+            style={styles.categories}>
+            <FlatList 
+              data={popular}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({item}) =>  <RecipeCard title={item.title} image={item.image} time={item.time} amount={item.amount}/>}
+              keyExtractor={(item) => String(item.id)}
+            />
+          </View >
+        </ScrollView>
+      )}
+
+
 
     </View>
   );
