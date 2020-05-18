@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import Svg, { Ellipse } from 'react-native-svg';
 import * as Animatable from 'react-native-animatable';
 
@@ -17,13 +17,13 @@ export default function Header() {
     <View behavior="height" style={styles.container}>
       <AnimatedSvg 
         useNativeDriver
-        animation="pulse"
+        animation='pulse'
         iterationCount={Infinity}
-        height="100%" width="100%" viewBox="0 0 100 100">
-        <Ellipse cx="50"
-                  cy="-32"
-                  rx="70"
-                  ry="40" 
+        height='100%' width='100%'>
+        <Ellipse cx={Dimensions.get('window').width / 2}
+                  cy="0"
+                  rx="330"
+                  ry="210" 
                   fill={commonStyles.colors.primary} />
       </AnimatedSvg>
     </View>
