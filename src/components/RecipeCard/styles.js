@@ -15,6 +15,29 @@ export default styles = StyleSheet.create({
         elevation: 10,
         borderRadius: 10
     },
+    shimmerImage: {
+        width: 150,
+        height: 136,
+        borderRadius: 10
+    },
+    shimmerTitle: {
+        width: 100,
+        marginTop: 12,
+        marginLeft: 16,
+        marginRight: 16,
+        height: 13,
+        borderRadius: 5,
+    },
+    shimmerAmount: {
+        width: 50,
+        height: 13,
+        borderRadius: 5,
+    },
+    shimmerTime: {
+        width: 50,
+        height: 13,
+        borderRadius: 5,
+    },
     image:{
         width: 150,
         height: 136,

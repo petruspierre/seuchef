@@ -7,6 +7,19 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff'
   },
+  header: {
+    zIndex: 1,
+    position: 'absolute',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    top: 0,
+    left: 0,
+    width: commonStyles.metric.screenWidth,
+    height: 50,
+  },
+  headerIcon: {
+    margin: 8,
+  },
   insideContainer: {
     marginTop: 292,
     backgroundColor: '#fff',
@@ -74,5 +87,13 @@ export default styles = StyleSheet.create({
     fontSize: 24,
     color: commonStyles.colors.black,
     marginTop: 8,
+    marginBottom: 8,
+  },
+  listText: {
+    fontSize: 18,
+    marginLeft: 16,
+    marginTop: 5,
+    fontFamily: commonStyles.fontFamily.regular,
+    color: commonStyles.colors.black,
   }
 })

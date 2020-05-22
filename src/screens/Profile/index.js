@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, Image, ScrollView, FlatList } from 'react-native';
+import { Text, View, Image, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons'
 
 import styles from './styles'
@@ -41,7 +41,9 @@ export default function Profile({ route }) {
 
       <Header />
       <View style={styles.header}>
-        <Feather style={{position: "absolute", left: 32, bottom: 56,}} name="log-out" size={20}/>
+        <TouchableOpacity style={{position: "absolute", left: 32, bottom: 56,}}>
+          <Feather name="log-out" size={20}/>
+        </TouchableOpacity>
         <Feather style={{position: "absolute", right: 32, bottom: 56,}} name="edit" size={20}/>
 
         <Image style={styles.image} source={{uri: 'https://i.pinimg.com/originals/f3/f2/4e/f3f24e283775a88fff1fe1c4929d0d9a.jpg'}}/>

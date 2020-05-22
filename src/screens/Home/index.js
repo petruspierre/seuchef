@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Text, View, TextInput, FlatList, ScrollView } from 'react-native';
 
+import api from '../../services/api'
 import styles from './styles'
 
 import Header from '../../components/Header'
@@ -10,8 +11,9 @@ import RecipeCard from '../../components/RecipeCard'
 export default function Home({ navigation }) {
 
   const [search, setSearch] = useState('')
+  const [loading, setLoading] = useState(true)
 
-  const [categories, setCategories] = useState([
+  const [categories, ] = useState([
     {
       id: 1,
       name: 'pizza',
@@ -32,7 +34,7 @@ export default function Home({ navigation }) {
     }
   ])
 
-  const [popular, setPopular] = useState([
+  const [recents, setRecents] = useState([
     {
       id: 1,
       title: 'sopa de mandioquinha',
@@ -58,6 +60,17 @@ export default function Home({ navigation }) {
       author: 'João Leão'
     }
   ])
+
+  async function getRecentRecipes(){
+    setLoading(true)
+    const response = await api.get(`/recipes/`)
+    setRecents(response.data.results)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getRecentRecipes()
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -102,15 +115,19 @@ export default function Home({ navigation }) {
           <View
             style={styles.categories}>
             <FlatList 
-              data={popular}
+              data={recents}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) =>  <RecipeCard 
-                                        author={item.author}
+                                        id={item.id}
+                                        loading={loading}
+                                        author={item.author.username}
                                         title={item.title} 
                                         image={item.image} 
                                         time={item.time} 
-                                        amount={item.amount}
+                                        amount={item.food_yield}
+                                        ingredients={item.ingredients}
+                                        steps={item.steps}
                                         />}
               keyExtractor={(item) => String(item.id)}
             />
@@ -121,10 +138,20 @@ export default function Home({ navigation }) {
           <View
             style={styles.categories}>
             <FlatList 
-              data={popular}
+              data={recents}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-              renderItem={({item}) =>  <RecipeCard title={item.title} image={item.image} time={item.time} amount={item.amount}/>}
+              renderItem={({item}) =>  <RecipeCard 
+                                        id={item.id}
+                                        loading={loading}
+                                        author={item.author.username}
+                                        title={item.title} 
+                                        image={item.image} 
+                                        time={item.time} 
+                                        amount={item.food_yield}
+                                        ingredients={item.ingredients}
+                                        steps={item.steps}
+                                        />}
               keyExtractor={(item) => String(item.id)}
             />
           </View >
