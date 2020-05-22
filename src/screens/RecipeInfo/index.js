@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
   View,
   Image,
@@ -6,14 +6,64 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
-  StatusBar
+  StatusBar,
+  ActivityIndicator,
+  AsyncStorage
 } from 'react-native'
-import { Feather } from '@expo/vector-icons'
+import { Feather, FontAwesome } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 
+import api from '../../services/api'
+import commonStyles from '../../commonStyles'
 import styles from './styles'
 
 export default function RecipeInfo({route, navigation}){
+
+  const [loadingFavorite, setLoadingFavorite] = useState('')
+  const [isFavorite, setIsFavorite] = useState(false)
+
+  async function handleFavorite(){
+
+    if(!loadingFavorite){
+
+      const token = await AsyncStorage.getItem('token')
+
+      setLoadingFavorite(true)
+      await api.post(`/recipes/self/favorites/${route.params.id}`, {
+        headers: {
+          Authorization: `Token ${token}`
+        }
+      })
+      setLoadingFavorite(false)
+      loadFavorite()
+    }    
+
+  }
+
+  async function loadFavorite(){
+    setLoadingFavorite(true)
+
+    const token = await AsyncStorage.getItem('token')
+    const response = await api.get('/users/self/favorites/', {
+      headers: {
+        Authorization: `Token ${token}`
+      }
+    })
+    const favorites = response.data.results
+    favorites.filter(value => value.id === route.params.id)
+
+    if(favorites.length === 0){
+      setIsFavorite(false)
+    } else {
+      setIsFavorite(true)
+    }
+
+    setLoadingFavorite(false)
+  }
+
+  useEffect(() => {
+    loadFavorite()
+  },[route.params.id])
 
   return (
     <View style={styles.container}>
@@ -24,8 +74,9 @@ export default function RecipeInfo({route, navigation}){
         <TouchableOpacity style={styles.headerIcon} onPress={() => navigation.goBack()}>
           <Feather name="arrow-left" size={32} color="#fff"/>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.headerIcon}>
-          <Feather name="bookmark" size={32} color="#fff"/>
+        <TouchableOpacity style={styles.headerIcon} onPress={handleFavorite}>
+          {loadingFavorite ? <ActivityIndicator size="large" color="#fff"/> : 
+            isFavorite ? <FontAwesome name="heart" size={30} color={commonStyles.colors.primary}/> : <FontAwesome name="heart-o" size={30} color="#fff"/>}
         </TouchableOpacity>
       </LinearGradient> 
 

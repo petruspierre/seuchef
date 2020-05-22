@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {TouchableOpacity, Image, Text, View} from 'react-native'
+import {TouchableOpacity, Image, Text, View, AsyncStorage} from 'react-native'
 
 import styles from './styles'
 

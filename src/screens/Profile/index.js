@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, Image, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, Image, ScrollView, FlatList, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Feather } from '@expo/vector-icons'
 
 import styles from './styles'
@@ -7,7 +7,7 @@ import styles from './styles'
 import Header from '../../components/Header'
 import RecipeCard from '../../components/RecipeCard'
 
-export default function Profile({ route }) {
+export default function Profile({ route, navigation }) {
 
   const [popular, setPopular] = useState([
     {
@@ -36,12 +36,17 @@ export default function Profile({ route }) {
     }
   ])
 
+  async function handleLogout(){
+    await AsyncStorage.removeItem('token')
+    navigation.navigate('Login')
+  }
+
   return (
     <View style={styles.container}>
 
       <Header />
       <View style={styles.header}>
-        <TouchableOpacity style={{position: "absolute", left: 32, bottom: 56,}}>
+        <TouchableOpacity style={{position: "absolute", left: 32, bottom: 56,}} onPress={handleLogout}>
           <Feather name="log-out" size={20}/>
         </TouchableOpacity>
         <Feather style={{position: "absolute", right: 32, bottom: 56,}} name="edit" size={20}/>

@@ -11,7 +11,8 @@ import RecipeCard from '../../components/RecipeCard'
 export default function Home({ navigation }) {
 
   const [search, setSearch] = useState('')
-  const [loading, setLoading] = useState(true)
+  const [loadingRecents, setLoadingRecents] = useState(true)
+  const [loadingPopular, setLoadingPopular] = useState(true)
 
   const [categories, ] = useState([
     {
@@ -61,14 +62,49 @@ export default function Home({ navigation }) {
     }
   ])
 
+  const [popular, setPopular] = useState([
+    {
+      id: 1,
+      title: 'sopa de mandioquinha',
+      image: 'https://img.itdg.com.br/tdg/images/recipes/000/198/564/304145/304145_original.jpg?mode=crop&width=710&height=400',
+      amount: 3,
+      time: 35,
+      author: 'Maria José'
+    },
+    {
+      id: 2,
+      title: 'carne de panela com batata',
+      image: 'https://craftlog.com/m/i/8480646=s1280=h960',
+      amount: 6,
+      time: 45,
+      author: 'João Leão'
+    },
+    {
+      id: 3,
+      title: 'lombo barbecue com farofa de frutas e espinafre frito',
+      image: 'https://img.imirante.com.br/2020/04/21/1587471393-887793063-304x175.jpg',
+      amount: 4,
+      time: 60,
+      author: 'João Leão'
+    }
+  ])
+
   async function getRecentRecipes(){
-    setLoading(true)
+    setLoadingRecents(true)
     const response = await api.get(`/recipes/`)
     setRecents(response.data.results)
-    setLoading(false)
+    setLoadingRecents(false)
+  }
+
+  async function getPopularRecipes(){
+    setLoadingPopular(true)
+    const response = await api.get(`/recipes/?order=ranking`)
+    setPopular(response.data.results)
+    setLoadingPopular(false)
   }
 
   useEffect(() => {
+    getPopularRecipes()
     getRecentRecipes()
   }, [])
 
@@ -115,12 +151,12 @@ export default function Home({ navigation }) {
           <View
             style={styles.categories}>
             <FlatList 
-              data={recents}
+              data={popular}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) =>  <RecipeCard 
                                         id={item.id}
-                                        loading={loading}
+                                        loading={loadingPopular}
                                         author={item.author.username}
                                         title={item.title} 
                                         image={item.image} 
@@ -143,7 +179,7 @@ export default function Home({ navigation }) {
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) =>  <RecipeCard 
                                         id={item.id}
-                                        loading={loading}
+                                        loading={loadingRecents}
                                         author={item.author.username}
                                         title={item.title} 
                                         image={item.image} 
