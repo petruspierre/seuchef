@@ -29,7 +29,7 @@ export default function RecipeInfo({route, navigation}){
       const token = await AsyncStorage.getItem('token')
 
       setLoadingFavorite(true)
-      await api.post(`/recipes/self/favorites/${route.params.id}`, {
+      await api.post(`/recipes/self/favorite/${route.params.id}`, {}, {
         headers: {
           Authorization: `Token ${token}`
         }
@@ -49,8 +49,10 @@ export default function RecipeInfo({route, navigation}){
         Authorization: `Token ${token}`
       }
     })
-    const favorites = response.data.results
-    favorites.filter(value => value.id === route.params.id)
+    const results = response.data.results
+    const favorites = results.filter(value => {
+      return value.id === route.params.id
+    })
 
     if(favorites.length === 0){
       setIsFavorite(false)
@@ -76,7 +78,7 @@ export default function RecipeInfo({route, navigation}){
         </TouchableOpacity>
         <TouchableOpacity style={styles.headerIcon} onPress={handleFavorite}>
           {loadingFavorite ? <ActivityIndicator size="large" color="#fff"/> : 
-            isFavorite ? <FontAwesome name="heart" size={30} color={commonStyles.colors.primary}/> : <FontAwesome name="heart-o" size={30} color="#fff"/>}
+             isFavorite ? <FontAwesome name="heart" size={30} color={commonStyles.colors.primary}/> : <FontAwesome name="heart-o" size={30} color="#fff"/>}
         </TouchableOpacity>
       </LinearGradient> 
 
