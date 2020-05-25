@@ -51,6 +51,17 @@ export default function Login({ navigation }){
 
       const response = await api.post('/users/login/', data)
       await AsyncStorage.setItem('token', response.data.token)
+
+      const user = await api.get('/users/self/', {
+        headers: {
+          Authorization: `Token ${response.data.token}`
+        }
+      })
+
+      await AsyncStorage.setItem('username', user.data.username)
+      await AsyncStorage.setItem('id', user.data.id)
+      //await AsyncStorage.setItem('image', user.data.image)
+
       setLoading(false)
 
       navigation.navigate('Home')

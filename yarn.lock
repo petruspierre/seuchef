@@ -2424,6 +2424,13 @@ expo-font@~8.1.0:
     fbjs "1.0.0"
     fontfaceobserver "^2.1.0"
 
+expo-image-picker@~8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-8.1.0.tgz#014e4f4aaef4c1daf56d13de27a41ef78660aa15"
+  integrity sha512-UMHiDGiflg47A/nfnmJ1gYdB/sEoxB4STVGgMeLNYpUkVR59kUWqsGTyVEtSywNCLPuXPZVB9NaRUd81Rbs7lA==
+  dependencies:
+    expo-permissions "~8.1.0"
+
 expo-keep-awake@~8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-8.1.0.tgz#3a1d8aa5a8395d40c7d79e1c93020ae5f848e664"
@@ -4494,7 +4501,7 @@ react-native-screens@~2.2.0:
   dependencies:
     debounce "^1.2.0"
 
-react-native-shimmer-placeholder@^1.0.35:
+react-native-shimmer-placeholder@1.0.35:
   version "1.0.35"
   resolved "https://registry.yarnpkg.com/react-native-shimmer-placeholder/-/react-native-shimmer-placeholder-1.0.35.tgz#e75612297155a337690a42faf606fdcc4660bd39"
   integrity sha512-qJS+eHjOuXZAxn4tFQFnRGHq6fzJOcNHrCKhbfx2+5v/Oa/W5G9Ww9DSPLiaAqzpRl74lcVZSufKTAxiVSB4qQ==

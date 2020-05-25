@@ -18,11 +18,18 @@ export default styles = StyleSheet.create({
         width: 150,
         height: 150,
         borderRadius: 75,
+        justifyContent: "center",
+        alignItems: "center"
     },
     username: {
         color: commonStyles.colors.black,
         fontSize: 36,
         fontFamily: commonStyles.fontFamily.regular
+    },
+    usernameShimmer: {
+        marginTop: 16,
+        height: 26,  
+        borderRadius: 8,
     },
     cardContainer: {
         marginTop: 16,
@@ -33,5 +40,21 @@ export default styles = StyleSheet.create({
         fontSize: 24,
         color: commonStyles.colors.black,
         fontFamily: commonStyles.fontFamily.regular
+    },
+    emptyWarningContainer: {
+        width: '100%',
+        marginTop: 16,
+        marginBottom: 8,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    emptyWarning: {
+        fontSize: 16,
+        color: commonStyles.colors.black,
+        fontFamily: commonStyles.fontFamily.regular,
+        marginLeft: 40,
+        marginRight: 40,
+        textAlign: "center"
     }
 })
