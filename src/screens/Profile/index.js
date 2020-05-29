@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, ScrollView, FlatList, TouchableOpacity, AsyncStorage } from 'react-native';
+import { Text, View, Image, ScrollView, FlatList, TouchableOpacity, AsyncStorage, Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker';
 
@@ -72,6 +72,9 @@ export default function Profile({ navigation }) {
 
   async function handleLogout(){
     await AsyncStorage.removeItem('token')
+    await AsyncStorage.removeItem('id')
+    await AsyncStorage.removeItem('username')
+    await AsyncStorage.removeItem('image')
     navigation.navigate('Login')
   }
 
@@ -106,7 +109,6 @@ export default function Profile({ navigation }) {
 
           setImage(result.uri)
           await AsyncStorage.setItem('image', result.uri)
-
         }
       } catch (err) {
         console.error(err);
@@ -148,16 +150,24 @@ export default function Profile({ navigation }) {
   }
 
   async function getUser(){
-    setUsername(await AsyncStorage.getItem('username'))
-    setId(await AsyncStorage.getItem('id'))
-    setImage(await AsyncStorage.getItem('image'))
+    const _image = await AsyncStorage.getItem('image')
+    const _username = await AsyncStorage.getItem('username')
+    const _id = await AsyncStorage.getItem('id')
+
+    setUsername(_username)
+    setId(_id)
+    setImage(_image)
   }
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      getUser()
-      loadRecipes()
-      loadFavorites()
+      try {
+        getUser()
+        loadRecipes()
+        loadFavorites()
+      } catch(err) {
+        Alert.alert('Erro ao recuperar dados')
+      }
     })
 
     return unsubscribe

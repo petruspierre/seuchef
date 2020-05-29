@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   AsyncStorage,
   ActivityIndicator,
+  Alert
 } from 'react-native'
 
 import commonStyles from '../../commonStyles'
@@ -49,22 +50,32 @@ export default function Login({ navigation }){
         password
       }
 
-      const response = await api.post('/users/login/', data)
-      await AsyncStorage.setItem('token', response.data.token)
-
-      const user = await api.get('/users/self/', {
-        headers: {
-          Authorization: `Token ${response.data.token}`
+      try {
+        const response = await api.post('/users/login/', data)
+        await AsyncStorage.setItem('token', response.data.token)
+  
+        const {data: {username, id, image}} = await api.get('/users/self/', {
+          headers: {
+            Authorization: `Token ${response.data.token}`
+          }
+        })
+  
+        if(image !== null){
+          await AsyncStorage.setItem('image', image)
+        } else {
+          await AsyncStorage.removeItem('image')
         }
-      })
-
-      await AsyncStorage.setItem('username', user.data.username)
-      await AsyncStorage.setItem('id', String(user.data.id))
-      await AsyncStorage.setItem('image', user.data.image)
-
+        await AsyncStorage.setItem('username', username)
+        await AsyncStorage.setItem('id', String(id))
+        console.log("(Login) " + image + " / username: " + username + " / id: " + id)
+      } catch(err){
+        Alert.alert(err)
+      }
+      
       setLoading(false)
 
       navigation.navigate('Home')
+
     } else if(mode === 'register'){
       if(!name || !password || !email || !confirmPassword){
         setShowError(true)
