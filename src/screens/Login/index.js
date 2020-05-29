@@ -59,8 +59,8 @@ export default function Login({ navigation }){
       })
 
       await AsyncStorage.setItem('username', user.data.username)
-      await AsyncStorage.setItem('id', user.data.id)
-      //await AsyncStorage.setItem('image', user.data.image)
+      await AsyncStorage.setItem('id', String(user.data.id))
+      await AsyncStorage.setItem('image', user.data.image)
 
       setLoading(false)
 

@@ -84,14 +84,32 @@ export default function Profile({ navigation }) {
           aspect: [5, 5],
           quality: 1,
         });
+
         if (!result.cancelled) {
+
+          const data = new FormData()
+          
+          data.append('image', {
+            uri: result.uri,
+            name: `image-${id}`,
+            type: 'image/jpg',
+          })
+
+          const token = await AsyncStorage.getItem('token')
+
+          await api.put("/users/self/image/", data, {
+            headers: {
+              Authorization: `Token ${token}`,
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+
           setImage(result.uri)
-          await AsyncStorage.setItem('image', JSON.stringify(result.uri))
+          await AsyncStorage.setItem('image', result.uri)
+
         }
-  
-        //console.log(result);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     } else {
       ImagePicker.requestCameraPermissionsAsync()
@@ -132,7 +150,7 @@ export default function Profile({ navigation }) {
   async function getUser(){
     setUsername(await AsyncStorage.getItem('username'))
     setId(await AsyncStorage.getItem('id'))
-    setImage(JSON.parse(await AsyncStorage.getItem('image')))
+    setImage(await AsyncStorage.getItem('image'))
   }
 
   useEffect(() => {
