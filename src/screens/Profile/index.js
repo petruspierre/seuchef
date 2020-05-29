@@ -91,7 +91,7 @@ export default function Profile({ navigation }) {
           
           data.append('image', {
             uri: result.uri,
-            name: `image-${id}`,
+            name: `image-${id}-${Math.random().toString(36).substring(7)}.jpg`,
             type: 'image/jpg',
           })
 
@@ -175,7 +175,9 @@ export default function Profile({ navigation }) {
           <Feather name="edit" size={20}/>
         </TouchableOpacity>
 
-        {image !== null ? <Image style={styles.image} source={{ uri: image }}/> : (
+        {image !== null ? 
+          <Image style={styles.image} source={{ uri: image }}/> : 
+        (
           <View style={[styles.image, {backgroundColor: commonStyles.colors.light}]}>
             {username.length > 0 && <Text style={{fontSize: 56, color: 'white'}}>{(username[0]).toUpperCase()}</Text>}
           </View>
