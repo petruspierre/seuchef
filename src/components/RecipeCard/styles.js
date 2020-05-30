@@ -54,7 +54,7 @@ export default styles = StyleSheet.create({
         borderRadius: 10
     },
     title: {
-        width: 192,
+        width: 120,
         marginTop: 8,
         marginLeft: 16,
         marginRight: 16,

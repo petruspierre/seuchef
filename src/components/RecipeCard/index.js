@@ -23,7 +23,7 @@ export default function RecipeCard(props){
       <TouchableOpacity style={styles.horizontalContainer} onPress={handleOpenRecipe}>
         <Image style={styles.image} source={{uri: props.image}}/>
         <View style={{width: 200}}>
-          <Text style={[styles.title, {fontSize: 16,}]}>{props.title}</Text>
+          <Text style={[styles.title, {fontSize: 16, width: 192}]}>{props.title}</Text>
           <View style={styles.horizontalDetailContainer}>
             <Text style={styles.horizontalPortion}>{props.amount} porções</Text>
             <Text style={styles.horizontalTime}>{props.time} min</Text>
