@@ -13,6 +13,7 @@ import AddRecipe from './screens/AddRecipe'
 import Profile from './screens/Profile'
 import RecipeInfo from './screens/RecipeInfo'
 import Login from './screens/Login'
+import Categories from './screens/Categories'
 
 import commonStyles from './commonStyles'
 
@@ -70,6 +71,7 @@ export default function Routes(){
         <Stack.Screen name='Home' component={TabNavigator}/>
         <Stack.Screen name="RecipeInfo" component={RecipeInfo}/>
         <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Categories" component={Categories}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

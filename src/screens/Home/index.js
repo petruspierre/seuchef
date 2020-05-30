@@ -21,22 +21,64 @@ export default function Home({ navigation }) {
   const [categories, ] = useState([
     {
       id: 1,
-      name: 'pizza',
-      count: 112,
-      image: 'https://pitel.com.br/wp-content/uploads/2019/04/PIZZA-HUT_SANTO-DESCONTO.jpg'
-    },
-    {
-      id: 2,
       name: 'brasileira',
-      count: 83,
+      alias: 'BRA',
       image: 'https://s2.glbimg.com/uRYjx6NzozEZV0ZRl3OWyHVipxs=/0x0:340x263/984x0/smart/filters:strip_icc()/s.glbimg.com/po/rc/media/2012/06/13/15/27/43/914/feijoada.jpg'
     },
     {
+      id: 2,
+      name: 'bolos e tortas',
+      alias: 'BOL',
+      image: 'https://img.itdg.com.br/tdg/images/recipes/000/029/124/320646/320646_original.jpg?mode=crop&width=710&height=400'
+    },
+    {
       id: 3,
+      name: 'carnes',
+      alias: 'CAR',
+      image: 'https://img.cybercook.com.br/receitas/651/como-fazer-carne-de-panela-receita-da-mae-623x350.jpeg'
+    },
+    {
+      id: 4,
+      name: 'chinesa',
+      alias: 'CHI',
+      image: 'https://abrilclaudia.files.wordpress.com/2016/10/receita-yakissoba.jpg?quality=85&strip=info&w=620'
+    },
+    {
+      id: 5,
+      name: 'doce',
+      alias: 'DOC',
+      image: 'https://s2.glbimg.com/nnBkJTQZcmSnAsu14zq7LyWqvfI=/e.glbimg.com/og/ed/f/original/2018/09/07/800px-brigadeiro.jpg'
+    },
+    {
+      id: 6,
+      name: 'fast food',
+      alias: 'FAS',
+      image: 'https://www.mercadoeconsumo.com.br/wp-content/uploads/2019/04/Que-comida-saud%C3%A1vel-que-nada-brasileiro-gosta-de-fast-food.jpg'
+    },
+    {
+      id: 7,
+      name: 'japonesa',
+      alias: 'JAP',
+      image: 'https://lh3.googleusercontent.com/proxy/TbRPJGUKPCqVufKX-wpq2kh4iHKuiPneNFfaMiLp9v7ccKAyoBwWl9KyUSqoVH7W2rQ6ymv116L-_Zc9Wrlftj0Ts_ltUcHiB4UmtbY'
+    },
+    {
+      id: 8,
       name: 'mexicana',
-      count: 52,
+      alias: 'MEX',
       image: 'https://superbeal.com.br/img/news/tacos_mexicanos_5dd2853be14e4.jpg'
-    }
+    },
+    {
+      id: 9,
+      name: 'massas',
+      alias: 'MAS',
+      image: 'https://cdn.pixabay.com/photo/2017/09/22/17/54/pasta-2776546_960_720.jpg'
+    },
+    {
+      id: 10,
+      name: 'saudável',
+      alias: 'SAL',
+      image: 'https://www.dicasdemulher.com.br/wp-content/uploads/2020/02/comida-saudavel-1200x738.jpg'
+    },
   ])
 
   const [recents, setRecents] = useState([
@@ -199,7 +241,7 @@ export default function Home({ navigation }) {
               data={categories}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-              renderItem={({item}) =>  <CategoryCard title={item.name} image={item.image} count={item.count}/>}
+              renderItem={({item}) =>  <CategoryCard title={item.name} image={item.image} count={item.count} onPress={() => navigation.navigate('Categories', {category: item.alias, title: item.name})}/>}
               keyExtractor={(item) => String(item.id)}
             />
           </View>

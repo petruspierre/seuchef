@@ -5,7 +5,7 @@ import commonStyles from '../../commonStyles'
 export default styles = StyleSheet.create({
     container: {
         width: 150,
-        height: 180,
+        height: 160,
         backgroundColor: '#fff',
         marginLeft: 16,
         marginRight: 8,
@@ -21,6 +21,7 @@ export default styles = StyleSheet.create({
     },
     title: {
         fontSize: 17,
+        marginBottom: 5,
         fontFamily: commonStyles.fontFamily.medium,
         color: commonStyles.colors.black
     },

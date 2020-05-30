@@ -225,10 +225,16 @@ export default function AddRecipe() {
                 selectedValue={type}
                 style={{height: '100%', width: '100%', borderRadius: 8}}
                 onValueChange={(item) => setType(item)}>
+                  <Picker.Item label="Brasileira" value="BRA"/>
+                  <Picker.Item label="Bolos e tortas" value="BOL"/>
+                  <Picker.Item label="Carnes" value="CAR"/>
+                  <Picker.Item label="Chinesa" value="CHI"/>
                   <Picker.Item label="Doce" value="DOC"/>
                   <Picker.Item label="Fast Food" value="FAS"/>
-                  <Picker.Item label="Brasileira" value="BRA"/>
-                  <Picker.Item label="Asiática" value="ASI"/>
+                  <Picker.Item label="Japonesa" value="JAP"/>
+                  <Picker.Item label="Mexicana" value="MEX"/>
+                  <Picker.Item label="Massas" value="MAS"/>
+                  <Picker.Item label="Saudável" value="SAL"/>
               </Picker>
             </View>
           </View>
