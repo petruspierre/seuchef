@@ -85,7 +85,7 @@ export default function RecipeInfo({route, navigation}){
       <Image style={styles.image} source={{uri: route.params.image}}/>
       <View style={styles.insideContainer}>
 
-          <View style={{flex: 0.4, marginBottom: 16,}}>
+          <View style={{}}>
             <Text style={styles.title}>{route.params.title}</Text>
             <Text style={styles.author}>por {route.params.author}</Text>
 
@@ -111,13 +111,13 @@ export default function RecipeInfo({route, navigation}){
               />
             </View>
 
-            <View style={[styles.card]}>
+            <View style={[styles.card, {marginRight: ((route.params.additional).length > 0) ? 0 : 32}]}>
               <Text style={styles.cardTitle}>modo de preparo</Text>
               <FlatList
                 style={{width: '100%', marginBottom: 8}} 
                 data={route.params.steps}
                 renderItem={({ item, index }) => (
-                  <View style={{flexDirection: "row", marginHorizontal: 24}}>
+                  <View style={{flexDirection: "row", marginHorizontal: 16, justifyContent: "flex-start", width: '80%'}}>
                     <Text style={[styles.listText, {marginHorizontal: 0, fontSize: 24}]}>{index+1}. </Text>
                     <Text style={[styles.listText, {marginHorizontal: 0, marginTop: 11,}]}>{item}</Text>
                   </View>)}
@@ -125,12 +125,14 @@ export default function RecipeInfo({route, navigation}){
               />
             </View>
 
-            <View style={[styles.card, {marginRight: 32}]}>
-              <Text style={styles.cardTitle}>informações adicionais</Text>
-              <ScrollView style={{marginBottom: 8}}>
-                <Text style={styles.additional}>{route.params.additional}</Text>
-              </ScrollView>
-            </View>
+            {(route.params.additional).length > 0 && (
+              <View style={[styles.card, {marginRight: 32}]}>
+                <Text style={styles.cardTitle}>informações adicionais</Text>
+                <ScrollView style={{marginBottom: 8}}>
+                  <Text style={styles.additional}>{route.params.additional}</Text>
+                </ScrollView>
+              </View>
+            )}
 
           </ScrollView>
         </View>
