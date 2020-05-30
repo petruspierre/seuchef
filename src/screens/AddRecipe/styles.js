@@ -5,8 +5,8 @@ import commonStyles from '../../commonStyles'
 export default styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
+        backgroundColor: "#fff"
     },
     imagePickContainer: {
         flexDirection: "row",
@@ -18,8 +18,6 @@ export default styles = StyleSheet.create({
         width: 350,
         height: 156,
         marginTop: 32,
-        marginLeft: 24,
-        marginRight: 24,
     },
     imagePicker: {
         backgroundColor: '#c4c4c4',
@@ -49,5 +47,46 @@ export default styles = StyleSheet.create({
         color: 'white',
         fontFamily: commonStyles.fontFamily.regular,
         fontSize: 14,
+    },
+    baseInput:{
+        width: 350,
+        height: 85,
+    },
+    title: {
+        fontSize: 18,
+        fontFamily: commonStyles.fontFamily.medium,
+        color: commonStyles.colors.black,
+        marginBottom: 8,
+    },
+    input: {
+        width: 350,
+        height: 50,
+        padding: 8,
+        paddingLeft: 16,
+        backgroundColor: "#fff",
+        borderRadius: 5,
+        elevation: 5,
+    },
+    detailBaseInput: {
+        width: 160,
+        height: 40,
+        padding: 8,
+        paddingLeft: 16,
+        backgroundColor: "#fff",
+        borderRadius: 5,
+        elevation: 5,
+        justifyContent: "space-between",
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    details: {
+        width: 350,
+        height: 80,
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    detailInput: {
+        width: 80,
+        textAlign: "center",
     }
 })

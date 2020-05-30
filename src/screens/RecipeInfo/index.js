@@ -114,7 +114,7 @@ export default function RecipeInfo({route, navigation}){
               <FlatList
                 style={{width: '100%'}} 
                 data={route.params.steps}
-                renderItem={({ item, index }) => <Text style={styles.listText}>{index+1} {item}</Text>}
+                renderItem={({ item, index }) => <Text style={styles.listText}>{index+1}. {item}</Text>}
                 keyExtractor={(_, index) => index.toString()}
               />
             </View>

@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import { Text, View, TextInput, FlatList, ScrollView } from 'react-native';
+import React, {useState, useEffect, useCallback} from 'react';
+import { Text, View, TextInput, FlatList, ScrollView, RefreshControl } from 'react-native';
 
 import api from '../../services/api'
 import styles from './styles'
@@ -13,6 +13,7 @@ export default function Home({ navigation }) {
   const [search, setSearch] = useState('')
   const [loadingRecents, setLoadingRecents] = useState(true)
   const [loadingPopular, setLoadingPopular] = useState(true)
+  const [refresh, setRefresh] = useState(false)
 
   const [categories, ] = useState([
     {
@@ -103,6 +104,13 @@ export default function Home({ navigation }) {
     setLoadingPopular(false)
   }
 
+  const onRefresh = useCallback(() => {
+    setRefresh(true)
+    getPopularRecipes()
+    getRecentRecipes()
+    setRefresh(false)
+  }, [refresh])
+
   useEffect(() => {
     getPopularRecipes()
     getRecentRecipes()
@@ -133,7 +141,9 @@ export default function Home({ navigation }) {
 
       {!search &&
       (
-        <ScrollView style={{marginTop: 24, paddingTop: 8,}}>
+        <ScrollView 
+          refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh}/>}
+          style={{marginTop: 24, paddingTop: 8,}}>
 
           <View 
             style={styles.categories}>

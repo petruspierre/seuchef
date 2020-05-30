@@ -9,7 +9,7 @@ import styles from './styles'
 
 export default function Button(props){
   return (
-    <TouchableOpacity style={styles.button} onPress={props.onPress}>
+    <TouchableOpacity style={[styles.button, props.style]} onPress={props.onPress}>
       <Text style={styles.text}>{props.title}</Text>
     </TouchableOpacity>
   )
