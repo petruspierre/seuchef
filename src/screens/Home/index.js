@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import { Text, View, TextInput, FlatList, ScrollView, RefreshControl, ActivityIndicator } from 'react-native';
+import { Text, Alert, BackHandler, View, TextInput, FlatList, ScrollView, RefreshControl, ActivityIndicator } from 'react-native';
+import { useFocusEffect } from "@react-navigation/native";
 
 import api from '../../services/api'
 import styles from './styles'
@@ -180,6 +181,27 @@ export default function Home({ navigation }) {
     }
     searchForRecipes()
   }, [search])
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert("opa!", "tem certeza que deseja sair?", [
+          {
+            text: "cancelar",
+            onPress: () => null,
+            style: "cancel"
+          },
+          { text: "sim", onPress: () => BackHandler.exitApp() }
+        ]);
+        return true;
+      };
+    
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+    
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    
+    }, []));
 
   return (
     <View style={styles.container}>
