@@ -25,6 +25,7 @@ export default styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    flex: 1,
   },
   image: {
     position: 'absolute',
@@ -69,16 +70,16 @@ export default styles = StyleSheet.create({
   },
   scrollContainer: {
     marginTop: 8,
-    height: 330,
+    flex: 1,
   },
   card: {
     marginTop: 8,
     width: commonStyles.metric.screenWidth - 84,
     marginLeft: 32,
     elevation: 10,
-    height: 300,
+    flex: 1,
     backgroundColor: '#fff',
-    marginBottom: 16,
+    marginBottom: 30,
     borderRadius: 10,
     alignItems: "center"
   },

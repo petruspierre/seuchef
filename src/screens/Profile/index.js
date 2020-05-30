@@ -15,7 +15,7 @@ export default function Profile({ navigation }) {
   const [username, setUsername] = useState('')
   const [image, setImage] = useState(null)
   const [id, setId] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const [favorites, setFavorites] = useState([
     {

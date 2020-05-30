@@ -85,16 +85,18 @@ export default function RecipeInfo({route, navigation}){
       <Image style={styles.image} source={{uri: route.params.image}}/>
       <View style={styles.insideContainer}>
 
-          <Text style={styles.title}>{route.params.title}</Text>
-          <Text style={styles.author}>por {route.params.author}</Text>
+          <View style={{flex: 0.4, marginBottom: 16,}}>
+            <Text style={styles.title}>{route.params.title}</Text>
+            <Text style={styles.author}>por {route.params.author}</Text>
 
-          <View style={styles.headerRow}>
-            <Text style={styles.headerSectionTitle}>preparo</Text>
-            <Text style={styles.headerSectionTitle}>rendimento</Text>
-          </View>
-          <View style={styles.headerRow}>
-            <Text style={styles.headerInfo}>{route.params.time} min</Text>
-            <Text style={styles.headerInfo}>{route.params.amount} porções</Text>
+            <View style={styles.headerRow}>
+              <Text style={styles.headerSectionTitle}>preparo</Text>
+              <Text style={styles.headerSectionTitle}>rendimento</Text>
+            </View>
+            <View style={styles.headerRow}>
+              <Text style={styles.headerInfo}>{route.params.time} min</Text>
+              <Text style={styles.headerInfo}>{route.params.amount} porções</Text>
+            </View>
           </View>
 
           <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={styles.scrollContainer}>

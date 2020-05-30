@@ -1,8 +1,9 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import { Text, View, TextInput, FlatList, ScrollView, RefreshControl } from 'react-native';
+import { Text, View, TextInput, FlatList, ScrollView, RefreshControl, ActivityIndicator } from 'react-native';
 
 import api from '../../services/api'
 import styles from './styles'
+import commonStyles from '../../commonStyles'
 
 import Header from '../../components/Header'
 import CategoryCard from '../../components/CategoryCard'
@@ -13,7 +14,9 @@ export default function Home({ navigation }) {
   const [search, setSearch] = useState('')
   const [loadingRecents, setLoadingRecents] = useState(true)
   const [loadingPopular, setLoadingPopular] = useState(true)
+  const [loadingSearch, setLoadingSearch] = useState(false)
   const [refresh, setRefresh] = useState(false)
+  const [loadingRecipes, setLoadingRecipes] = useState(false)
 
   const [categories, ] = useState([
     {
@@ -90,6 +93,8 @@ export default function Home({ navigation }) {
     }
   ])
 
+  const [searchRecipes, setSearchRecipes] = useState([])
+
   async function getRecentRecipes(){
     setLoadingRecents(true)
     const response = await api.get(`/recipes/`)
@@ -116,6 +121,24 @@ export default function Home({ navigation }) {
     getRecentRecipes()
   }, [])
 
+  useEffect(() => {
+    async function searchForRecipes(){
+      setLoadingSearch(true)
+      if(search.length > 3){
+        if(loadingRecipes) return
+  
+        if(!loadingRecipes){
+          setLoadingRecipes(true)
+          const data = recents.filter(item => (item.title).indexOf(search) !== -1)
+          setSearchRecipes(data)
+          setLoadingRecipes(false)
+        }
+      }
+      setLoadingSearch(false)
+    }
+    searchForRecipes()
+  }, [search])
+
   return (
     <View style={styles.container}>
 
@@ -125,7 +148,6 @@ export default function Home({ navigation }) {
         {!search && (
           <View>
             <Text style={styles.title}>olá, chef! </Text>
-
             <Text style={styles.subtitle}> já decidiu o que vai comer hoje? </Text>
           </View>
         )}
@@ -137,7 +159,33 @@ export default function Home({ navigation }) {
             placeholder="nome da receita"
             autoCapitalize="none"
           />
+
       </View>
+
+      {search.length > 0 && loadingSearch && (
+        <View style={{flex: 1, justifyContent: "center"}}>
+          {loadingSearch && <ActivityIndicator size="large" color={commonStyles.colors.primary}/>}
+        </View>
+      )}
+
+      {search.length > 0 && (
+        <View style={{marginTop: 16, flex: 1, width: '100%', alignItems: "center"}}>
+          <FlatList 
+            data={searchRecipes}
+            renderItem={({item}) => <RecipeCard
+                                      horizontal
+                                      id={item.id}
+                                      loading={loadingRecents}
+                                      author={item.author.username}
+                                      title={item.title} 
+                                      image={item.image} 
+                                      time={item.time} 
+                                      amount={item.food_yield}
+                                      ingredients={item.ingredients}
+                                      steps={item.steps}
+                                      />}
+            keyExtractor={(item) => String(item.index)}/>
+        </View>)}
 
       {!search &&
       (
