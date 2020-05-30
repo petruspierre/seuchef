@@ -214,6 +214,7 @@ export default function Profile({ navigation }) {
                                       amount={item.food_yield}
                                       ingredients={item.ingredients}
                                       steps={item.steps}
+                                      additional={item.additional_information}
                                       />}
             keyExtractor={(item) => String(item.id)}
           />
@@ -239,6 +240,7 @@ export default function Profile({ navigation }) {
                                       amount={item.food_yield}
                                       ingredients={item.ingredients}
                                       steps={item.steps}
+                                      additional={item.additional_information}
                                       />}
             keyExtractor={(item) => String(item.id)}
           />

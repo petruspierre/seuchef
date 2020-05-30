@@ -52,6 +52,7 @@ export default function Categories({ route }){
                                     amount={item.food_yield}
                                     ingredients={item.ingredients}
                                     steps={item.steps}
+                                    additional={item.additional_information}
                                     />}
           keyExtractor={(item) => String(item.id)}
         />

@@ -15,7 +15,7 @@ export default function RecipeCard(props){
   const navigation = useNavigation()
 
   function handleOpenRecipe(){
-    navigation.navigate('RecipeInfo', {id: props.id, image: props.image, title: props.title, author: props.author, time: props.time, amount: props.amount, ingredients: props.ingredients, steps: props.steps})
+    navigation.navigate('RecipeInfo', {id: props.id, additional: props.additional, image: props.image, title: props.title, author: props.author, time: props.time, amount: props.amount, ingredients: props.ingredients, steps: props.steps})
   }
 
   if(props.horizontal){

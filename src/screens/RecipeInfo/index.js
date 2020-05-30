@@ -104,21 +104,32 @@ export default function RecipeInfo({route, navigation}){
             <View style={styles.card}>
               <Text style={styles.cardTitle}>igredientes</Text>
               <FlatList
-                style={{width: '100%'}} 
+                style={{width: '100%', marginBottom: 8}} 
                 data={route.params.ingredients}
                 renderItem={({ item }) => <Text style={styles.listText}>• {item}</Text>}
                 keyExtractor={(_, index) => index.toString()}
               />
             </View>
 
-            <View style={[styles.card, {marginRight: 32}]}>
+            <View style={[styles.card]}>
               <Text style={styles.cardTitle}>modo de preparo</Text>
               <FlatList
-                style={{width: '100%'}} 
+                style={{width: '100%', marginBottom: 8}} 
                 data={route.params.steps}
-                renderItem={({ item, index }) => <Text style={styles.listText}>{index+1}. {item}</Text>}
+                renderItem={({ item, index }) => (
+                  <View style={{flexDirection: "row", marginHorizontal: 24}}>
+                    <Text style={[styles.listText, {marginHorizontal: 0, fontSize: 24}]}>{index+1}. </Text>
+                    <Text style={[styles.listText, {marginHorizontal: 0, marginTop: 11,}]}>{item}</Text>
+                  </View>)}
                 keyExtractor={(_, index) => index.toString()}
               />
+            </View>
+
+            <View style={[styles.card, {marginRight: 32}]}>
+              <Text style={styles.cardTitle}>informações adicionais</Text>
+              <ScrollView style={{marginBottom: 8}}>
+                <Text style={styles.additional}>{route.params.additional}</Text>
+              </ScrollView>
             </View>
 
           </ScrollView>

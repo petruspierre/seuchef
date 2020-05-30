@@ -92,9 +92,17 @@ export default styles = StyleSheet.create({
   },
   listText: {
     fontSize: 18,
-    marginLeft: 16,
+    marginHorizontal: 24,
     marginTop: 5,
     fontFamily: commonStyles.fontFamily.regular,
     color: commonStyles.colors.black,
+    textAlign: 'justify'
+  },
+  additional: {
+    fontSize: 18,
+    marginHorizontal: 24,
+    fontFamily: commonStyles.fontFamily.regular,
+    color: commonStyles.colors.black,
+    textAlign: 'justify'
   }
 })
