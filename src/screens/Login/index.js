@@ -42,6 +42,7 @@ export default function Login({ navigation }){
         setErrorMessage('Preencha todos os campos')
         return
       }
+
       setShowError(false)
       setLoading(true)
 
@@ -69,7 +70,7 @@ export default function Login({ navigation }){
         await AsyncStorage.setItem('id', String(id))
         console.log("(Login) " + image + " / username: " + username + " / id: " + id)
       } catch(err){
-        Alert.alert(err)
+        Alert.alert('Erro', String(err))
       }
       
       setLoading(false)
@@ -110,17 +111,23 @@ export default function Login({ navigation }){
         setErrorMessage('Preencha todos os campos')
         return
       }
-      setShowError(false)
-      setLoading(true)
 
-      const data = {
-        activation_token: code
+      try {
+        setShowError(false)
+        setLoading(true)
+  
+        const data = {
+          activation_token: code
+        }
+  
+        const response = await api.post('/users/active-account/', data)
+        setMode('login')
+        setLoading(false)
+      } catch(err){
+        Alert.alert('Erro', 'Código inválido')
+        setLoading(false)
       }
-
-      await api.post('/users/active-account/', data)
-      setMode('login')
-
-      setLoading(false)
+ 
     }
   }
 
