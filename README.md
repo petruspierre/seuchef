@@ -4,7 +4,7 @@
 
 [![Current Version](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/petruspierre/seuchef)
 
-### SeuChef is an mobile application to **share** and **discover** recipes easily.
+### SeuChef is a mobile application to **share** and **discover** recipes easily.
 
 ![Screenshots](https://i.ibb.co/jh8kkBt/Group-19.png)
 
@@ -13,7 +13,7 @@
 ## Features
 - Share your own recipes;
 - Discover new recipes;
-- Favorite recipes for easy access later;
+- Favorite recipes to easy access later;
 - Search recipes by name and category;
 - User register with email code confirmation.
 
